@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "express": "^4.16.4",
-    "mathjs": "^5.4.0",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
