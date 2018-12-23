@@ -119,25 +119,35 @@ const infixToPostfix = (infix) => {
   return queue
 }
 
-// Operate according to operator with two tokens
-const operate = (operator, o1, o2) => {
+// Return binary operation according to operator token
+const binaryOperation = (operator) => {
   switch (operator) {
     case "+":
-      return o1 + o2
+      return (o1, o2) => {
+        return o1 + o2
+      }
     case "-":
-      return o1 - o2
+      return (o1, o2) => {
+        return o1 - o2
+      }
     case "*":
-      return o1 * o2
+      return (o1, o2) => {
+        return o1 * o2
+      }
     case "/":
-      return o1 / o2
+      return (o1, o2) => {
+        return o1 / o2
+      }
   }
 }
 
-// Operate according to operator with single token
-const operateUnary = (operator, o1) => {
+// Return unary operation according to operator token
+const unaryOperation = (operator) => {
   switch (operator) {
     case "u":
-      return -1 * o1
+      return (o1) => {
+        return -1 * o1
+      }
   }
 }
 
@@ -157,11 +167,13 @@ const processPostfix = (postfix) => {
       stack.push(Number(token))
     } else if (token === "u") {
       const o1 = stack.pop()
-      stack.push(operateUnary(token, o1))
+      const operation = unaryOperation(token)
+      stack.push(operation(o1))
     } else {
       const o2 = stack.pop()
       const o1 = stack.pop()
-      stack.push(operate(token, o1, o2))
+      const operation = binaryOperation(token)
+      stack.push(operation(o1, o2))
     }
   }
 
