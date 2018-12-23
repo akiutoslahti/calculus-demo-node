@@ -16,10 +16,8 @@ router.get("/calculus", (req, res) => {
     return res.status(400).send(resError)
   }
 
-  // Decoder base64 and remove all whitespace
-  const decodedQuery = Buffer.from(query, "base64")
-    .toString("utf8")
-    .replace(/\s/g, "")
+  // Decode base64
+  const decodedQuery = Buffer.from(query, "base64").toString("utf8")
 
   // If there are errors in parsing or evaluating math expression,
   // respond with error message
