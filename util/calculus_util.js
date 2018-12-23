@@ -6,7 +6,7 @@ const checkParens = (expression) => {
     if (token === "(") {
       stack.push(token)
     } else if (token === ")") {
-      if (stack[stack.length - 1] === "(") {
+      if (stack.slice(-1).pop() === "(") {
         stack.pop()
       }
     }
@@ -23,13 +23,14 @@ const validate = (expression) => {
 }
 
 // Check whether a string token is a number
-const isNumber = (token) => !isNaN(parseFloat(token)) && isFinite(token)
+const isNumber = (token) =>
+  !Number.isNaN(parseFloat(token)) && Number.isFinite(Number(token))
 
 // Produce new array without empty indexes
 const cleanArray = (array) => array.filter((token) => token !== "")
 
 // Split expression on operators
-const splitToArray = (expression) => expression.split(/([\+\-\*\/\(\)])/)
+const splitToArray = (expression) => expression.split(/([+\-*/()])/)
 
 // Remove whitespace from expression
 const removeWhiteSpace = (expression) => expression.replace(/\s+/g, "")
@@ -41,21 +42,23 @@ Minus sign is unary operator if
 2. It is preceded by another operator
 */
 const findUnaryOperators = (array) => {
-  const arrayWithUnaries = []
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] === "-" && (i === 0 || "(/*+-".indexOf(array[i - 1]) !== -1)) {
-      arrayWithUnaries.push("u")
-    } else {
-      arrayWithUnaries.push(array[i])
+  const arrayWithUnaries = array.map((token, index, arr) => {
+    if (
+      token === "-" &&
+      (index === 0 || "(/*+-".indexOf(arr[index - 1]) !== -1)
+    ) {
+      return "u"
     }
-  }
+    return token
+  })
+
   return arrayWithUnaries
 }
 
 // Precedences for operators
-const precedences = { u: 6, "/": 5, "*": 5, "+": 4, "-": 4, "(": 0 }
+const precedences = { u: 3, "/": 2, "*": 2, "+": 1, "-": 1, "(": 0 }
 
-// Shunting yard algorithm to conver mathematical expression from infix notation to postfix notation
+// Shunting yard algorithm to convert mathematical expression from infix notation to postfix notation
 const infixToPostfix = (infix) => {
   const queue = []
   const stack = []
@@ -65,44 +68,44 @@ const infixToPostfix = (infix) => {
     cleanArray(splitToArray(removeWhiteSpace(infix)))
   )
 
-  // Convert to cleaned infix to postfix
-  for (let i = 0; i < cleanedInfix.length; i++) {
-    const token = cleanedInfix[i]
-
-    /*
-    1. If token is a number, push to queue
-    2. If token is '(', push to stack
-    3. If token is ')', pop operators from stack to queue until '(' is reached
-    4. If token is operator, pop operators from stack to queue while current 
-    tokens precedence is smaller than precedence of operator at the top of the stack.
-    5. Finally empty stack to queue.
-    */
+  /*
+  Convert to cleaned infix to postfix
+  1. If token is a number, push to queue
+  2. If token is '(', push to stack
+  3. If token is ')', pop operators from stack to queue until '(' is reached
+  4. If token is operator, pop operators from stack to queue while current
+  tokens precedence is smaller than precedence of operator at the top of the stack.
+  5. Finally empty stack to queue.
+  */
+  cleanedInfix.forEach((token) => {
     if (isNumber(token)) {
       queue.push(token)
     } else if (token === "(") {
       stack.push(token)
     } else if (token === ")") {
-      while (stack[stack.length - 1] !== "(") {
+      while (stack.slice(-1).pop() !== "(") {
         queue.push(stack.pop())
       }
       stack.pop()
     } else if ("u/*+-".indexOf(token) !== -1) {
-      let operator = stack[stack.length - 1]
+      let operator = stack.slice(-1).pop()
       while (
         "u/*+-".indexOf(operator) !== -1 &&
         precedences[token] <= precedences[operator]
       ) {
         queue.push(stack.pop())
-        operator = stack[stack.length - 1]
+        operator = stack.slice(-1).pop()
       }
       stack.push(token)
     } else {
       throw new Error("Expression contains unsupported operator.")
     }
-  }
+  })
+
   while (stack.length > 0) {
     queue.push(stack.pop())
   }
+
   return queue
 }
 
@@ -152,7 +155,7 @@ const processPostfix = (postfix) => {
     }
   })
 
-  if (stack.length > 1 || isNaN(stack[stack.length - 1])) {
+  if (stack.length > 1 || Number.isNaN(stack.slice(-1).pop())) {
     throw Error("Malformatted expression, incorrect count of operators.")
   }
 
