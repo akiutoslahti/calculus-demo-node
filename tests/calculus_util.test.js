@@ -28,6 +28,45 @@ describe("calculus util", () => {
       expect(result).toBe(testCase.result)
     })
   })
+
+  test("Balance of parentheses", () => {
+    try {
+      calculus.evaluateExpression("(()(())")
+    } catch (err) {
+      expect(err.message).toEqual(
+        "Malformatted expression, parentheses are not balanced."
+      )
+    }
+
+    try {
+      calculus.evaluateExpression("(()()")
+    } catch (err) {
+      expect(err.message).toEqual(
+        "Malformatted expression, parentheses are not balanced."
+      )
+    }
+
+    const result = calculus.evaluateExpression("(()((0))())")
+    expect(result).toBe(0)
+  })
+
+  test("Unsupported operator", () => {
+    try {
+      calculus.evaluateExpression("2 + 3 * 4^3")
+    } catch (err) {
+      expect(err.message).toEqual("Expression contains unsupported operator.")
+    }
+  })
+
+  test("Incorrect count of operators", () => {
+    try {
+      calculus.evaluateExpression("2 + 3 */ 43")
+    } catch (err) {
+      expect(err.message).toEqual(
+        "Malformatted expression, incorrect count of operators."
+      )
+    }
+  })
 })
 
 const simpleArithmetic = [
