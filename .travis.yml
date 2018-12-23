@@ -1,4 +1,8 @@
 language: node_js
 node_js:
-  - "lts/*"
-  - "8"
+  - "10"
+deploy:
+  provider: heroku
+  api_key:
+    secure: T1ZSMTbqFzhIJ/zjBjsaz6aQFIlPn2s8WkpvG/CvdixXQ6QIgg78sr/sTOFQZA7+yx7U6d0PtygmQWWy13WVI7IEnpRNpUpY1TIgV2AXGbGA+R02PJAaxkeu4EAG5CuqMMmbRwa+g2rJLYkOftLXxysRRfzy3RX1fHcy7Vpu/xL+Y0rc9T+51K+cJQWjt3gFigYyQALH2yqwTQizEzM9LS7afy8spqPdYfOHEWTChfsRCcE5tp/MakmxLHFRNS3DUVVW6ohHx7+Lhg6aEWxvNDVCU+S9BZaGEnwMtCOVpZEYdLR3G+vg12C/pcM3AOFTB8kII4MaSRdNc3fOuCv2jRwxAfmvY7wqxNxdqaK1PVtLkAEYZ6c+tADquPO1BApDt7nu7MN0mP84DcFRcyqFaNj3Q10kQk0QGM11viM5VyYEy2UHl6fn3rUyPc6sEJUTcfg73RfZtjwR/viDw0ga4TGS70zhQD0CuNOOl7u5VY+5QxL9cD4+Saa54HGODTZ8oo82WV0BuOV6nX3PKijHLlI1wwkuCfILQV8Mc4GIpmNrnXUbHO1nczVBwR9gxq/N0bk/GRahMUIQJiQgd9oswDe0MJGV7tsoJ9YLSY70uHGTb+j+wt4vpS/codG9bVGTW9g5rJ8g43RuY990TUTSgHA5WejZxkOZ/FTJk+ZZdao=
+  app: calculus-demo
