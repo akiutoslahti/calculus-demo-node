@@ -109,26 +109,17 @@ const infixToPostfix = (infix) => {
   return queue
 }
 
-// Return binary operation according to operator token
-const binaryOperation = (operator) => {
-  switch (operator) {
-    case "+":
-      return (operand1, operand2) => operand1 + operand2
-    case "-":
-      return (operand1, operand2) => operand1 - operand2
-    case "*":
-      return (operand1, operand2) => operand1 * operand2
-    case "/":
-      return (operand1, operand2) => operand1 / operand2
-  }
+// Binary operation functions corresponding to operator
+const binaryOperation = {
+  "+": (operand1, operand2) => operand1 + operand2,
+  "-": (operand1, operand2) => operand1 - operand2,
+  "*": (operand1, operand2) => operand1 * operand2,
+  "/": (operand1, operand2) => operand1 / operand2
 }
 
-// Return unary operation according to operator token
-const unaryOperation = (operator) => {
-  switch (operator) {
-    case "u":
-      return (operand1) => -1 * operand1
-  }
+// Unary operation functions corresponding to operator
+const unaryOperation = {
+  u: (operand1) => operand1 * -1
 }
 
 // Evaluate result of expression in postfix notation
@@ -145,12 +136,12 @@ const processPostfix = (postfix) => {
       stack.push(Number(token))
     } else if (token === "u") {
       const operand1 = stack.pop()
-      const operation = unaryOperation(token)
+      const operation = unaryOperation[token]
       stack.push(operation(operand1))
     } else {
       const operand2 = stack.pop()
       const operand1 = stack.pop()
-      const operation = binaryOperation(token)
+      const operation = binaryOperation[token]
       stack.push(operation(operand1, operand2))
     }
   })
