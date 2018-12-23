@@ -94,7 +94,7 @@ describe("calculus api", () => {
       .expect("Content-Type", /application\/json/)
     const { error, result } = response.body
     expect(error).toBe(false)
-    expect(result).toBe(14)
+    expect(result).toBe(-4)
   })
 
   test("GET /calculus returns 200 when url parameter 'query' is more complex math expression", async () => {

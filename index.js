@@ -9,7 +9,11 @@ const port = process.env.PORT || 3000
 
 app.use(morgan("dev"))
 app.use(calculusRouter)
-app.get("*", (req, res) => res.send("there is nothing to see here! :)"))
+app.get("*", (req, res) =>
+  res.send(
+    "Nothing to see here, try posting base64 encoded math expression to '/calculus?query=[expression]'!"
+  )
+)
 
 const server = http.createServer(app)
 

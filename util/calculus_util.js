@@ -22,7 +22,7 @@ const checkParens = (expression) => {
 }
 
 // Check whether a string token is a number
-function isNumber(token) {
+const isNumber = (token) => {
   return !isNaN(parseFloat(token)) && isFinite(token)
 }
 
@@ -43,20 +43,40 @@ const splitToArray = (expression) => {
 }
 
 // Remove whitespace from expression
-const noWhiteSpace = (expression) => {
+const removeWhiteSpace = (expression) => {
   return expression.replace(/\s+/g, "")
 }
 
+/* 
+Replace unary minus operators with 'u'
+Minus sign is unary operator if
+1. It is the first operator of expression or
+2. It is preceded by another operator
+*/
+const findUnaryOperators = (array) => {
+  const arrayWithUnaries = []
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === "-" && (i === 0 || "(/*+-".indexOf(array[i - 1]) !== -1)) {
+      arrayWithUnaries.push("u")
+    } else {
+      arrayWithUnaries.push(array[i])
+    }
+  }
+  return arrayWithUnaries
+}
+
 // Precedences for operators
-const precedences = { "/": 5, "*": 5, "+": 4, "-": 4, "(": 0 }
+const precedences = { u: 6, "/": 5, "*": 5, "+": 4, "-": 4, "(": 0 }
 
 // Shunting yard algorithm to conver mathematical expression from infix notation to postfix notation
 const infixToPostfix = (infix) => {
   const queue = []
   const stack = []
 
-  // Remove whitespace, split to array and remove empty indexes
-  const cleanedInfix = cleanArray(splitToArray(noWhiteSpace(infix)))
+  // Find unary operators, remove whitespace, split to array and remove empty indexes
+  const cleanedInfix = findUnaryOperators(
+    cleanArray(splitToArray(removeWhiteSpace(infix)))
+  )
 
   // Convert to cleaned infix to postfix
   for (let i = 0; i < cleanedInfix.length; i++) {
@@ -79,10 +99,10 @@ const infixToPostfix = (infix) => {
         queue.push(stack.pop())
       }
       stack.pop()
-    } else if ("/*+-".indexOf(token) !== -1) {
+    } else if ("u/*+-".indexOf(token) !== -1) {
       let operator = stack[stack.length - 1]
       while (
-        "/*+-".indexOf(operator) !== -1 &&
+        "u/*+-".indexOf(operator) !== -1 &&
         precedences[token] <= precedences[operator]
       ) {
         queue.push(stack.pop())
@@ -113,6 +133,14 @@ const operate = (operator, o1, o2) => {
   }
 }
 
+// Operate according to operator with single token
+const operateUnary = (operator, o1) => {
+  switch (operator) {
+    case "u":
+      return -1 * o1
+  }
+}
+
 // Evaluate result of expression in postfix notation
 const processPostfix = (postfix) => {
   const stack = []
@@ -127,6 +155,9 @@ const processPostfix = (postfix) => {
 
     if (isNumber(token)) {
       stack.push(Number(token))
+    } else if (token === "u") {
+      const o1 = stack.pop()
+      stack.push(operateUnary(token, o1))
     } else {
       const o2 = stack.pop()
       const o1 = stack.pop()
