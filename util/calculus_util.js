@@ -1,13 +1,8 @@
-// Expression validator(s)
-const validate = (expression) => {
-  checkParens(expression)
-}
-
 // Check that expression has balanced parentheses
 const checkParens = (expression) => {
   const stack = []
-  for (let i = 0; i < expression.length; i++) {
-    const token = expression[i]
+
+  expression.split("").forEach((token) => {
     if (token === "(") {
       stack.push(token)
     } else if (token === ")") {
@@ -15,37 +10,29 @@ const checkParens = (expression) => {
         stack.pop()
       }
     }
-  }
+  })
+
   if (stack.length > 0) {
     throw Error("Malformatted expression, parentheses are not balanced.")
   }
 }
 
-// Check whether a string token is a number
-const isNumber = (token) => {
-  return !isNaN(parseFloat(token)) && isFinite(token)
+// Expression validator(s)
+const validate = (expression) => {
+  checkParens(expression)
 }
+
+// Check whether a string token is a number
+const isNumber = (token) => !isNaN(parseFloat(token)) && isFinite(token)
 
 // Produce new array without empty indexes
-const cleanArray = (array) => {
-  const cleanedArray = []
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] !== "") {
-      cleanedArray.push(array[i])
-    }
-  }
-  return cleanedArray
-}
+const cleanArray = (array) => array.filter((token) => token !== "")
 
 // Split expression on operators
-const splitToArray = (expression) => {
-  return expression.split(/([\+\-\*\/\(\)])/)
-}
+const splitToArray = (expression) => expression.split(/([\+\-\*\/\(\)])/)
 
 // Remove whitespace from expression
-const removeWhiteSpace = (expression) => {
-  return expression.replace(/\s+/g, "")
-}
+const removeWhiteSpace = (expression) => expression.replace(/\s+/g, "")
 
 /* 
 Replace unary minus operators with 'u'
@@ -123,21 +110,13 @@ const infixToPostfix = (infix) => {
 const binaryOperation = (operator) => {
   switch (operator) {
     case "+":
-      return (operand1, operand2) => {
-        return operand1 + operand2
-      }
+      return (operand1, operand2) => operand1 + operand2
     case "-":
-      return (operand1, operand2) => {
-        return operand1 - operand2
-      }
+      return (operand1, operand2) => operand1 - operand2
     case "*":
-      return (operand1, operand2) => {
-        return operand1 * operand2
-      }
+      return (operand1, operand2) => operand1 * operand2
     case "/":
-      return (operand1, operand2) => {
-        return operand1 / operand2
-      }
+      return (operand1, operand2) => operand1 / operand2
   }
 }
 
@@ -145,9 +124,7 @@ const binaryOperation = (operator) => {
 const unaryOperation = (operator) => {
   switch (operator) {
     case "u":
-      return (operand1) => {
-        return -1 * operand1
-      }
+      return (operand1) => -1 * operand1
   }
 }
 
@@ -160,9 +137,7 @@ const processPostfix = (postfix) => {
   2. If token is operator, pop two operands from stack and push result of operands and operation defined by token to stack
   3. After evaluating whole expression, result is left in stack.
   */
-  for (let i = 0; i < postfix.length; i++) {
-    const token = postfix[i]
-
+  postfix.forEach((token) => {
     if (isNumber(token)) {
       stack.push(Number(token))
     } else if (token === "u") {
@@ -175,7 +150,7 @@ const processPostfix = (postfix) => {
       const operation = binaryOperation(token)
       stack.push(operation(operand1, operand2))
     }
-  }
+  })
 
   if (stack.length > 1 || isNaN(stack[stack.length - 1])) {
     throw Error("Malformatted expression, incorrect count of operators.")
