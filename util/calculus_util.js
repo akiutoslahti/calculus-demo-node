@@ -123,20 +123,20 @@ const infixToPostfix = (infix) => {
 const binaryOperation = (operator) => {
   switch (operator) {
     case "+":
-      return (o1, o2) => {
-        return o1 + o2
+      return (operand1, operand2) => {
+        return operand1 + operand2
       }
     case "-":
-      return (o1, o2) => {
-        return o1 - o2
+      return (operand1, operand2) => {
+        return operand1 - operand2
       }
     case "*":
-      return (o1, o2) => {
-        return o1 * o2
+      return (operand1, operand2) => {
+        return operand1 * operand2
       }
     case "/":
-      return (o1, o2) => {
-        return o1 / o2
+      return (operand1, operand2) => {
+        return operand1 / operand2
       }
   }
 }
@@ -145,8 +145,8 @@ const binaryOperation = (operator) => {
 const unaryOperation = (operator) => {
   switch (operator) {
     case "u":
-      return (o1) => {
-        return -1 * o1
+      return (operand1) => {
+        return -1 * operand1
       }
   }
 }
@@ -166,14 +166,14 @@ const processPostfix = (postfix) => {
     if (isNumber(token)) {
       stack.push(Number(token))
     } else if (token === "u") {
-      const o1 = stack.pop()
+      const operand1 = stack.pop()
       const operation = unaryOperation(token)
-      stack.push(operation(o1))
+      stack.push(operation(operand1))
     } else {
-      const o2 = stack.pop()
-      const o1 = stack.pop()
+      const operand2 = stack.pop()
+      const operand1 = stack.pop()
       const operation = binaryOperation(token)
-      stack.push(operation(o1, o2))
+      stack.push(operation(operand1, operand2))
     }
   }
 
