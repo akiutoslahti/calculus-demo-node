@@ -2,8 +2,7 @@ version: "3.7"
 
 services:
   calculus:
-    build:
-      context: .
+    image: akiutoslahti/calculus-demo
     ports:
       - "80:80"
     environment:
