@@ -1,6 +1,14 @@
 language: node_js
 node_js:
   - "10"
+services:
+  - docker
+
+before_install:
+  - docker build -t akiutoslahti/calculus-demo .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push akiutoslahti/calculus-demo
+
 deploy:
   provider: heroku
   api_key:
