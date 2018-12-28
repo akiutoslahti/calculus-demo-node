@@ -41,5 +41,5 @@ Project is built using Node.js. Travis CI is used for building a Docker image an
 ### Links
 - [Travis CI](https://travis-ci.org/akiutoslahti/calculus-demo-node)
 - [Codecov](https://codecov.io/gh/akiutoslahti/calculus-demo-node)
-- [Docker Hub]()https://hub.docker.com/r/akiutoslahti/calculus-demo
+- [Docker Hub](https://hub.docker.com/r/akiutoslahti/calculus-demo)
 - [Heroku](https://calculus-demo.herokuapp.com/)
