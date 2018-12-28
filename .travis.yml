@@ -1,10 +1,16 @@
 language: node_js
+
 node_js:
   - "10"
+
 services:
   - docker
 
-before_install:
+install:
+  - yarn add codecov
+
+script:
+  - jest --verbose && codecov
   - docker build -t akiutoslahti/calculus-demo .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push akiutoslahti/calculus-demo

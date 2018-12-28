@@ -4,6 +4,13 @@ const { app, server } = require("../index")
 const api = supertest(app)
 
 describe("calculus api", () => {
+  test("Get / returns 200 and instructions of use", async () => {
+    const response = await api.get("/").expect(200)
+    expect(response.text).toEqual(
+      "Nothing to see here, try posting base64 encoded math expression to '/calculus?query=[expression]'!"
+    )
+  })
+
   test("GET /calculus returns 400 and error message when url parameter 'query' is missing", async () => {
     const response = await api
       .get("/calculus")

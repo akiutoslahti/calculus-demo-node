@@ -69,14 +69,14 @@ describe("calculus util", () => {
     }
 
     try {
-      calculus.evaluateExpression("(()()")
+      calculus.evaluateExpression("(()))()")
     } catch (err) {
       expect(err.message).toEqual(
         "Malformatted expression, parentheses are not balanced."
       )
     }
 
-    const result = calculus.evaluateExpression("(()((0))())")
+    const result = calculus.evaluateExpression("(()((0)())(())())")
     expect(result).toBe(0)
   })
 

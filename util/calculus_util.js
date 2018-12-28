@@ -8,6 +8,8 @@ const checkParens = (expression) => {
     } else if (token === ")") {
       if (stack.slice(-1).pop() === "(") {
         stack.pop()
+      } else {
+        throw Error("Malformatted expression, parentheses are not balanced.")
       }
     }
   })
