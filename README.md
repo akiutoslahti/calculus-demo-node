@@ -20,7 +20,7 @@ Response:
 }
 ```
 
-Application will attempt identify simple faults in expression and respond in following manner:
+In case of malformatted expression, application will attempt identify fault and responds in following manner:
 ```
 {
   error: true,
