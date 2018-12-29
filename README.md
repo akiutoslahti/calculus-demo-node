@@ -12,7 +12,9 @@ Send a base64 encoded math expression to https://calculus-demo.herokuapp.com/cal
 Expression: 4 * 7 / 2 + 3  
 Expression in base64: NCAqIDcgLyAyICsgMw==  
 Query: https://calculus-demo.herokuapp.com/calculus?query=NCAqIDcgLyAyICsgMw==  
-Response HTTP/1.1 200 OK with JSON:
+Response:
+
+HTTP/1.1 200 OK
 ```
 {
   error: false,
@@ -20,7 +22,9 @@ Response HTTP/1.1 200 OK with JSON:
 }
 ```
 
-In case of malformatted expression, application will attempt identify fault and responds HTTP/1.1 400 Bad Request with JSON:
+In case of malformatted expression, application will attempt identify fault and responds:
+
+HTTP/1.1 400 Bad Request
 ```
 {
   error: true,
