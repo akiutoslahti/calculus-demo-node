@@ -30,12 +30,12 @@ In case of malformatted expression, application will attempt identify fault and 
 
 ## Build stack and pipeline
 
-Project is built using Node.js. Travis CI is used for building a Docker image and publishing it in Docker Hub, running tests and publishing coverage reports to Codecov and publishing latest working version of application in Heroku. There is also a Dockerfile for building a docker image and a docker-compose file for running application in http://localhost .
+Project is built using Node.js with Yarn dependency management. Travis CI is used for building and publishing image to Docker Hub, publishing test coverage results to codecov and deploying appication to Heroku. There is also a Dockerfile for building a docker image and a docker-compose file for running application in http://localhost .
 
 ## Development stack used in project
 - node 10.14.2
 - yarn 1.12.3
-- docker CE 18.09.0
+- docker ce 18.09.0
 - docker-compose 1.23.2
 
 ### Links
