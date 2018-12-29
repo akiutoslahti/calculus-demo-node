@@ -28,6 +28,44 @@ In case of malformatted expression, application will attempt identify fault and 
 }
 ```
 
+## Run application locally
+First clone the project from github, change directory to cloned projects directory and then use either node or docker to run it.
+```
+git clone https://github.com/akiutoslahti/calculus-demo-node.git
+cd calculus-demo-node
+```
+
+### Node
+Install dependencies
+```
+yarn install
+```
+
+To start and bind application to default port 3000
+```
+yarn start
+```
+
+To start and bind application to other port, e.g. 8080
+```
+PORT=8080 yarn start
+```
+
+Stop application with CTRL+C.
+
+### Docker
+Application binds to localhost port 80 when started with docker. To change port you can change port definitions in docker-compose.yml
+
+Start application with docker-compose
+```
+docker-compose up -d
+```
+
+Stop application with docker-compose
+```
+docker-compose down
+```
+
 ## Build stack and pipeline
 
 Project is built using Node.js with Yarn dependency management. Travis CI is used for building and publishing image to Docker Hub, publishing test coverage results to codecov and deploying appication to Heroku. There is also a Dockerfile for building a docker image and a docker-compose file for running application on your own computer.
@@ -38,7 +76,7 @@ Project is built using Node.js with Yarn dependency management. Travis CI is use
 - docker ce 18.09.0
 - docker-compose 1.23.2
 
-### Links
+## Links
 - [Travis CI](https://travis-ci.org/akiutoslahti/calculus-demo-node)
 - [Codecov](https://codecov.io/gh/akiutoslahti/calculus-demo-node)
 - [Docker Hub](https://hub.docker.com/r/akiutoslahti/calculus-demo)
