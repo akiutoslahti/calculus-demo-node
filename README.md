@@ -5,7 +5,7 @@
 ## Application
 Latest build live in [Heroku!](https://calculus-demo.herokuapp.com/)
 
-Send a base64 encoded math expression to https://calculus-demo.herokuapp.com/calculus?query=[expression] and application will calculate it for you and respond with JSON.
+Send a base64 encoded math expression to https://calculus-demo.herokuapp.com/calculus?query=[expression] and application will calculate it for you and respond with JSON. Supported operators are: / * + - ( )
 
 ### Example
 
