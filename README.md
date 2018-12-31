@@ -75,13 +75,13 @@ docker-compose down
 Project is built using Node.js with Yarn dependency management. Travis CI is used for building and publishing image to Docker Hub, publishing test coverage results to codecov and deploying appication to Heroku. There is also a Dockerfile for building a docker image and a docker-compose file for running application on your own computer.
 
 ## Development stack used in project
-  - node 10.14.2
-  - yarn 1.12.3
-  - docker ce 18.09.0
-  - docker-compose 1.23.2
+- node 10.14.2
+- yarn 1.12.3
+- docker ce 18.09.0
+- docker-compose 1.23.2
 
 ## Links
-  - [Travis CI](https://travis-ci.org/akiutoslahti/calculus-demo-node)
-  - [Codecov](https://codecov.io/gh/akiutoslahti/calculus-demo-node)
-  - [Docker Hub](https://hub.docker.com/r/akiutoslahti/calculus-demo)
-  - [Heroku](https://calculus-demo.herokuapp.com/)
+- [Travis CI](https://travis-ci.org/akiutoslahti/calculus-demo-node)
+- [Codecov](https://codecov.io/gh/akiutoslahti/calculus-demo-node)
+- [Docker Hub](https://hub.docker.com/r/akiutoslahti/calculus-demo)
+- [Heroku](https://calculus-demo.herokuapp.com/)
