@@ -5,13 +5,13 @@
 ## Application
 Latest build live in [Heroku!](https://calculus-demo.herokuapp.com/)
 
-Send a base64 encoded math expression to https://calculus-demo.herokuapp.com/calculus?query=[expression] and application will calculate it for you and respond with JSON. Supported operators are: / * + - ( )
+Send a base64 encoded math expression to <https://calculus-demo.herokuapp.com/calculus?query=[expression]> and application will calculate it for you and respond with JSON. Supported operators are: / * + - ( )
 
 ### Example
 
 Expression: 4 * 7 / 2 + 3  
 Expression in base64: NCAqIDcgLyAyICsgMw==  
-Query: https://calculus-demo.herokuapp.com/calculus?query=NCAqIDcgLyAyICsgMw==  
+Query: <https://calculus-demo.herokuapp.com/calculus?query=NCAqIDcgLyAyICsgMw==>  
 Response:
 
 HTTP/1.1 200 OK
@@ -34,24 +34,24 @@ HTTP/1.1 400 Bad Request
 
 ## Run application locally
 First clone the project from github, change directory to cloned projects directory and then use either node or docker to run it.
-```
+```bash
 git clone https://github.com/akiutoslahti/calculus-demo-node.git
 cd calculus-demo-node
 ```
 
 ### Node
 Install dependencies
-```
+```bash
 yarn install
 ```
 
 To start and bind application to default port 3000
-```
+```bash
 yarn start
 ```
 
 To start and bind application to other port, e.g. 8080
-```
+```bash
 PORT=8080 yarn start
 ```
 
@@ -61,12 +61,12 @@ Stop application with CTRL+C.
 Application binds to localhost port 80 when started with docker. To change port you can change port definitions in docker-compose.yml
 
 Start application with docker-compose
-```
+```bash
 docker-compose up -d
 ```
 
 Stop application with docker-compose
-```
+```bash
 docker-compose down
 ```
 
@@ -75,13 +75,13 @@ docker-compose down
 Project is built using Node.js with Yarn dependency management. Travis CI is used for building and publishing image to Docker Hub, publishing test coverage results to codecov and deploying appication to Heroku. There is also a Dockerfile for building a docker image and a docker-compose file for running application on your own computer.
 
 ## Development stack used in project
-- node 10.14.2
-- yarn 1.12.3
-- docker ce 18.09.0
-- docker-compose 1.23.2
+  - node 10.14.2
+  - yarn 1.12.3
+  - docker ce 18.09.0
+  - docker-compose 1.23.2
 
 ## Links
-- [Travis CI](https://travis-ci.org/akiutoslahti/calculus-demo-node)
-- [Codecov](https://codecov.io/gh/akiutoslahti/calculus-demo-node)
-- [Docker Hub](https://hub.docker.com/r/akiutoslahti/calculus-demo)
-- [Heroku](https://calculus-demo.herokuapp.com/)
+  - [Travis CI](https://travis-ci.org/akiutoslahti/calculus-demo-node)
+  - [Codecov](https://codecov.io/gh/akiutoslahti/calculus-demo-node)
+  - [Docker Hub](https://hub.docker.com/r/akiutoslahti/calculus-demo)
+  - [Heroku](https://calculus-demo.herokuapp.com/)
