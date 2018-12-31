@@ -48,7 +48,7 @@ describe("calculus util", () => {
   test("Arithmetic with decimals", () => {
     decimalArithmetic.forEach((testCase) => {
       const result = calculus.evaluateExpression(testCase.expression)
-      expect(Math.abs(result - testCase.result)).toBeLessThan(0.000001)
+      expect(Math.abs(result - testCase.result)).toBeLessThan(1.0e-6)
     })
   })
 
