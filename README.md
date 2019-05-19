@@ -85,3 +85,4 @@ Project is built using Node.js with Yarn dependency management. Travis CI is use
 -  [Codecov](https://codecov.io/gh/akiutoslahti/calculus-demo-node)
 -  [Docker Hub](https://hub.docker.com/r/akiutoslahti/calculus-demo)
 -  [Heroku](https://calculus-demo.herokuapp.com/)
+
