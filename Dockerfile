@@ -8,4 +8,6 @@ RUN yarn install --production && \
     adduser -D calculus && \
     chown calculus:calculus /calculus
 
+USER calculus
+
 CMD yarn start
