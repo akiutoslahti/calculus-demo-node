@@ -2,26 +2,26 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   namespace: workshop
-  name: aki-calculus
+  name: akiutoslahti-calculus-demo-node
   labels:
-    app: aki-calculus
+    app: akiutoslahti-calculus-demo-node
 
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      app: aki-calculus
+      app: akiutoslahti-calculus-demo-node
 
   template:
     metadata:
       labels:
-        app: aki-calculus
+        app: akiutoslahti-calculus-demo-node
       annotations:
     spec:
       containers:
-        - image: gcr.io/unity-ads-workshop-test/aki-calculus:latest
-          name: aki-calculus
+        - image: gcr.io/unity-ads-workshop-test/akiutoslahti-calculus-demo-node:latest
+          name: akiutoslahti-calculus-demo-node
           imagePullPolicy: IfNotPresent
           resources:
             requests:
