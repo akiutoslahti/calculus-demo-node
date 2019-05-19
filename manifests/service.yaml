@@ -10,8 +10,8 @@ spec:
   type: NodePort
   ports:
     - name: http
-      port: 3000
+      port: 8080
       protocol: TCP
-      targetPort: 3000
+      targetPort: 8080
   selector:
     app: akiutoslahti-calculus-demo-node
