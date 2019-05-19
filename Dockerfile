@@ -4,7 +4,7 @@ EXPOSE 3000
 WORKDIR /calculus
 
 COPY . /calculus
-RUN npm ci && \
+RUN npm install && \
     adduser -D calculus && \
     chown calculus:calculus /calculus
 
