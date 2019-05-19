@@ -4,10 +4,10 @@ EXPOSE 3000
 WORKDIR /calculus
 
 COPY . /calculus
-RUN yarn install --production && \
+RUN npm ci && \
     adduser -D calculus && \
     chown calculus:calculus /calculus
 
 USER calculus
 
-CMD yarn start
+CMD npm run start
